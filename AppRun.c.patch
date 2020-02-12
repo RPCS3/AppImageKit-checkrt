@@ -21,7 +21,7 @@
 +    {
 +        char errorStr[1035];
 +        fgets(errorStr, sizeof(errorStr), fp);
-+        const char* searchStr = "*libstdc++*version `CXXABI_*' not found (required by";
++        const char* searchStr = "*libstdc++*version `*' not found (required by";
 +        int searchStrI = 0;
 +        int errorStrI = 0;
 +        int lastWildcard = 0;
