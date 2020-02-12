@@ -1,3 +1,5 @@
 /AppRun.c
 /AppRun_patched*
+/AppRun-patched*
+*.so
 *.o

@@ -1,6 +1,6 @@
 CFLAGS ?= -O2 -Wall -Wextra
 LDFLAGS += -s
-BIN = AppRun_patched
+BIN = AppRun-patched-x86_64
 LIB = exec-x86_64.so
 EXEC_TEST = exec_test
 ENV_TEST = env_test
@@ -12,14 +12,14 @@ test: $(EXEC_TEST) $(ENV_TEST)
 all: checkrt test
 
 clean:
-	-rm -f $(BIN) $(LIB) $(EXEC_TEST) $(ENV_TEST) *.o AppRun.c AppRun_patched.c
+	-rm -f $(BIN) $(LIB) $(EXEC_TEST) $(ENV_TEST) *.o AppRun.c AppRun-patched-x86_64.c
 
-$(BIN): AppRun_patched.o checkrt.o env.o
+$(BIN): AppRun-patched-x86_64.o checkrt.o env.o
 
 $(LIB): exec.o env.o
 	$(CC) -shared $(LDFLAGS) -o $@ $^ -ldl
 
-AppRun_patched.o checkrt.o: CFLAGS += -include checkrt.h
+AppRun-patched-x86_64.o checkrt.o: CFLAGS += -include checkrt.h
 exec.o env.o: CFLAGS += -fPIC
 
 $(EXEC_TEST): CFLAGS += -DEXEC_TEST
@@ -34,7 +34,7 @@ run_tests: $(EXEC_TEST) $(ENV_TEST)
 	./$(ENV_TEST)
 	./$(EXEC_TEST)
 
-AppRun_patched.c: AppRun.c
+AppRun-patched-x86_64.c: AppRun.c
 	patch -p1 --output $@  < AppRun.c.patch
 
 AppRun.c:
